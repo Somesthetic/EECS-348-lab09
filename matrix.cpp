@@ -8,7 +8,7 @@
 
 // e.g. for the constructor:
 template <class T>
-Matrix<T>::Matrix(size_t N) {
+Matrix<T>::Matrix(int N) {
   for (int row = 0; row <= size-1; row++){
     std::vector<int> new_row;
     for (int column = 0; column <= size-1; column++){
@@ -45,19 +45,19 @@ int Matrix<T>::get_size() const{
 }
 
 template <class T>
-T Matrix<T>::get_value(std::size_t i, std::size_t j) const{;
+T Matrix<T>::get_value(int i, int j) const{;
   return the_data[i][j];
 }
 
 template <class T>
-void Matrix<T>::set_value(std::size_t i, std::size_t j, T n){;
+void Matrix<T>::set_value(int i, int j, T n){;
   the_data[i][j] = n;  // returns val at that coord
   return;
 }
 
 template <class T>
 Matrix<T> Matrix<T>::operator + (const Matrix &rhs) const{;
-  Matrix<float> output(size);  // Makes sure the output is always a float
+  Matrix<T> output(size);  // Makes sure the output is always a float
   for (int i = 0; i <= size-1; i++){;
     for (int j = 0; j <= size-1; j++){;
       output.set_value(i,j, get_value(i,j) + rhs.get_value(i,j));
@@ -68,7 +68,7 @@ Matrix<T> Matrix<T>::operator + (const Matrix &rhs) const{;
 
 template <class T>
 Matrix<T> Matrix<T>::operator*(const Matrix &rhs) const{;
-  Matrix<float> output(size);
+  Matrix<T> output(size);
   for (int i = 0; i < size; i++) {           // Iterate over rows of mat1
     for (int j = 0; j < size; j++) {       // Iterate over columns of mat2
       for (int k = 0; k < size; k++) {   // Iterate over row elements of mat1 and column elements of mat2
@@ -98,7 +98,7 @@ T Matrix<T>::sum_diagonal_minor() const{;
 }
 
 template <class T>
-void Matrix<T>::swap_rows(std::size_t r1, std::size_t r2){;
+void Matrix<T>::swap_rows(int r1, int r2){;
   std::vector temp_row = the_data[r1];
   for (int j = 0; j < size; j++){;
     set_value(r1, j, the_data[r2][j]);  // setting the r1 variables
@@ -108,7 +108,7 @@ void Matrix<T>::swap_rows(std::size_t r1, std::size_t r2){;
 }
 
 template <class T>
-void Matrix<T>::swap_cols(std::size_t c1, std::size_t c2){;
+void Matrix<T>::swap_cols(int c1, int c2){;
   std::vector<T> temp_column;
   for (int i = 0; i < size; i++){;
     temp_column[i] = get_value(i, c1);  // get the value about to be deleted
