@@ -3,9 +3,10 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <string.h>
 
 
-int main(int argc, char *argv[]) {  // chat gpt 3 was used to help with understanding the syntax in this code block
+int main() {  // chat gpt 3 was used to help with understanding the syntax in this code block
     std::string file_name;
     std::cout << "File name: ";
     std::cin >> file_name;
@@ -13,20 +14,28 @@ int main(int argc, char *argv[]) {  // chat gpt 3 was used to help with understa
     std::fstream the_file;
     the_file.open(file_name, std::ios::in);
 
-    if (the_file.is_open()) {
+    if (the_file.is_open()) {;
         int N;  // Matrix size
         std::vector<std::vector<int>> matrix1, matrix2;
         std::string line;
 
+
+
         // Read the size of the matrix (N)
         std::getline(the_file, line);
+        int size = reinterpret_cast<int>(strtok(line.data(), " "));
+        if (reinterpret_cast<bool>(strtok(line.data(), " "))){;
+            using T = float;
+        }else {
+            using T = int;
+        }
+
         std::stringstream ss(line);
         ss >> N;
-
         // Read the first matrix (matrix1)
         for (int i = 0; i < N; ++i) {
             std::getline(the_file, line);
-            std::vector<int> row;
+            std::vector<T> row;
             std::stringstream rowStream(line);
             int value;
             while (rowStream >> value) {
@@ -38,7 +47,7 @@ int main(int argc, char *argv[]) {  // chat gpt 3 was used to help with understa
         // Read the second matrix (matrix2)
         for (int i = 0; i < N; ++i) {
             std::getline(the_file, line);
-            std::vector<int> row;
+            std::vector<T> row;
             std::stringstream rowStream(line);
             int value;
             while (rowStream >> value) {
@@ -51,8 +60,8 @@ int main(int argc, char *argv[]) {  // chat gpt 3 was used to help with understa
         the_file.close();
 
         // Create Matrix objects from the vectors
-        Matrix matrix_1(matrix1);
-        Matrix matrix_2(matrix2);
+        Matrix matrix_1<T>(matrix1);
+        Matrix matrix_2<T>(matrix2);
 
         // Print the matrices using the Matrix class print method
         std::cout << "Matrix 1:\n";
